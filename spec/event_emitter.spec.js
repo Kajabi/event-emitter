@@ -52,7 +52,7 @@ describe('EventEmitter', function() {
   });
 
 
-  function signinatureArgumentCount(fn, count) {
+  function signatureArgumentCount(fn, count) {
     return function() {
       if (count === 2) {
         (function () { emitter[fn]('x', function () {}, 1); }).should.throw();
@@ -65,20 +65,20 @@ describe('EventEmitter', function() {
 
   describe('subscription', function () {
 
-    function signinatureEventName(fn) {
+    function signatureEventName(fn) {
       return function() {
         (function () { emitter[fn](1, function () {}); }).should.throw();
         (function () { emitter[fn]('', function () {}); }).should.throw();
       };
     }
 
-    function signinatureCallback(fn) {
+    function signatureCallback(fn) {
       return function() {
         (function () { emitter[fn]('x', 1); }).should.throw();
       };
     }
 
-    function signinatureCount(fn) {
+    function signatureCount(fn) {
       return function() {
         (function () { emitter[fn]('x', function () {}, false); }).should.throw();
         (function () { emitter[fn]('x', function () {}, 0); }).should.throw();
@@ -94,16 +94,16 @@ describe('EventEmitter', function() {
     describe('.on(eventName, callback[, count])', function () {
 
       it('throws unless argumentCount is 2 .. 3',
-         signinatureArgumentCount('on', 3));
+         signatureArgumentCount('on', 3));
 
       it('throws unless `eventName` is a non-empty string',
-         signinatureEventName('on'));
+         signatureEventName('on'));
 
       it('throws unless `callback` is a function',
-         signinatureCallback('on'));
+         signatureCallback('on'));
 
       it('accepts undefined, null or int>=1 for `count`',
-         signinatureCount('on'));
+         signatureCount('on'));
 
 
       it('subscribes to future events', function() {
@@ -169,13 +169,13 @@ describe('EventEmitter', function() {
     describe('.on1(eventName, callback)', function () {
 
       it('throws unless argumentCount is 2',
-         signinatureArgumentCount('on1', 2));
+         signatureArgumentCount('on1', 2));
 
       it('throws unless `eventName` is a non-empty string',
-         signinatureEventName('on1'));
+         signatureEventName('on1'));
 
       it('throws unless `callback` is a function',
-         signinatureCallback('on1'));
+         signatureCallback('on1'));
 
 
       it('is an alias to .on(eventName, callback, 1)', function() {
@@ -198,16 +198,16 @@ describe('EventEmitter', function() {
     describe('.after(eventName, callback[, count])', function () {
 
       it('throws unless argumentCount is 2 .. 3',
-         signinatureArgumentCount('after', 3));
+         signatureArgumentCount('after', 3));
 
       it('throws unless `eventName` is a non-empty string',
-         signinatureEventName('after'));
+         signatureEventName('after'));
 
       it('throws unless `callback` is a function',
-         signinatureCallback('after'));
+         signatureCallback('after'));
 
       it('accepts undefined, null or int>=1 for `count`',
-         signinatureCount('after'));
+         signatureCount('after'));
 
 
       it('subscribes to future events and last past event', function() {
@@ -290,13 +290,13 @@ describe('EventEmitter', function() {
     describe('.after1(eventName, callback)', function () {
 
       it('throws unless argumentCount is 2',
-         signinatureArgumentCount('after1', 2));
+         signatureArgumentCount('after1', 2));
 
       it('throws unless `eventName` is a non-empty string',
-         signinatureEventName('after1'));
+         signatureEventName('after1'));
 
       it('throws unless `callback` is a function',
-         signinatureCallback('after1'));
+         signatureCallback('after1'));
 
 
       it('is an alias to .after(eventName, callback, 1)', function() {
@@ -438,7 +438,7 @@ describe('EventEmitter', function() {
   describe('.clear(eventName)', function () {
 
     it('throws unless argumentCount is 1',
-       signinatureArgumentCount('clear', 1));
+       signatureArgumentCount('clear', 1));
 
     it('clears subscriptions', function () {
       var increment = 0;
@@ -482,7 +482,7 @@ describe('EventEmitter', function() {
   describe('.recall(eventName[, callback])', function () {
 
     it('throws unless argumentCount is 1',
-       signinatureArgumentCount('recall', 1));
+       signatureArgumentCount('recall', 1));
 
     it('returns arguments and scope of last event emission', function () {
       var lastCall,

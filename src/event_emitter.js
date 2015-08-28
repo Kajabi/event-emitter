@@ -9,7 +9,7 @@ function EventEmitter(decoratableObject) {
 
 
   this.clear = function (eventName) {
-    signitureCheck(arguments, 1);
+    signatureCheck(arguments, 1);
 
     var eventCue  = getEventCue(eventName),
         cueLength = eventCue.length;
@@ -23,7 +23,7 @@ function EventEmitter(decoratableObject) {
   };
 
   this.emit = function (eventName) {
-    signitureCheck(arguments);
+    signatureCheck(arguments);
 
     var i, inf, cueLength,
         args     = Array.prototype.slice.call(arguments, 1),
@@ -57,7 +57,7 @@ function EventEmitter(decoratableObject) {
   };
 
   this.recall = function (eventName, callback) {
-    signitureCheck(arguments, 2, 1);
+    signatureCheck(arguments, 2, 1);
 
     if (flushArgs[eventName]) {
       if (callback) {
@@ -74,7 +74,7 @@ function EventEmitter(decoratableObject) {
   };
 
   this.on = function (eventName, callback, count) {
-    count = signitureCheck(arguments, 3);
+    count = signatureCheck(arguments, 3);
 
     var inf = {
       id:          incrementId,
@@ -91,12 +91,12 @@ function EventEmitter(decoratableObject) {
   };
 
   this.on1 = function (eventName, callback) {
-    signitureCheck(arguments, 2);
+    signatureCheck(arguments, 2);
     return _self.on(eventName, callback, 1);
   };
 
   this.after = function (eventName, callback, count) {
-    count = signitureCheck(arguments, 3);
+    count = signatureCheck(arguments, 3);
 
     if (_self.recall(eventName, callback)) {
       if (count === 1) {
@@ -111,7 +111,7 @@ function EventEmitter(decoratableObject) {
   };
 
   this.after1 = function (eventName, callback) {
-    signitureCheck(arguments, 2);
+    signatureCheck(arguments, 2);
     return _self.after(eventName, callback, 1);
   };
 
@@ -137,7 +137,7 @@ function EventEmitter(decoratableObject) {
     }
   }
 
-  function signitureCheck(args, maxArgCount, minArgCount) {
+  function signatureCheck(args, maxArgCount, minArgCount) {
     minArgCount = minArgCount || maxArgCount;
 
     if (maxArgCount && args.length > maxArgCount) {
