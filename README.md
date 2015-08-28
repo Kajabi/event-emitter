@@ -6,6 +6,10 @@ A JavaScript library that does node.js-ish event subscription/emission PLUS
 - simple unsubscription
 - allows subscribing for last event in the past.
 
+This should be a dependable low-level library.
+Check out our [test page](https://kajabi.github.io/event-emitter/test.html).
+
+
 # API
 
 ## Subscription interface
