@@ -435,7 +435,7 @@ describe('EventEmitter', function() {
   });
 
 
-  describe('.clear(eventName)', function () {
+  describe('.clear([eventName])', function () {
 
     it('throws unless argumentCount is 1',
        signinatureArgumentCount('clear', 1));
@@ -474,6 +474,21 @@ describe('EventEmitter', function() {
       emitter.clear('my_event');
 
       emitter.recall('my_event').should.equal(false);
+    });
+
+    it('clears all events if no arg passed', function () {
+      function shouldNotBeCalled() {
+        throw new Error('should not have called this');
+      }
+
+      emitter.on('event1', shouldNotBeCalled);
+      emitter.on('event2', shouldNotBeCalled);
+      emitter.on('event2', shouldNotBeCalled);
+
+      emitter.clear().should.equal(3);
+
+      emitter.emit('event1').should.equal(0);
+      emitter.emit('event2').should.equal(0);
     });
 
   });

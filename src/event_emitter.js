@@ -9,10 +9,20 @@ function EventEmitter(decoratableObject) {
 
 
   this.clear = function (eventName) {
+    var cueLength, eventCue;
+
+    if (arguments.length === 0)  {
+      cueLength = 0;
+      for (eventName in cue) {
+        cueLength += _self.clear(eventName);
+      }
+      return cueLength;
+    }
+
     signitureCheck(arguments, 1);
 
-    var eventCue  = getEventCue(eventName),
-        cueLength = eventCue.length;
+    eventCue  = getEventCue(eventName);
+    cueLength = eventCue.length;
 
     delete flushArgs[eventName];
     delete flushScope[eventName];
