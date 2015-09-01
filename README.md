@@ -109,11 +109,16 @@ This function picks up scope of the `emit` call and passes it to the triggered c
 
     eventEmitter.emit.call(myObject, 'sum_array');
 
-### .flush(eventName)
-Combined `emit` + `clear`
+### .flush(eventName[, argument1[, argument2...]])
+Combined `emit(eventName, args...)` + `clear(eventName)`
 
-### .clear(eventName)
-Unsubscribe all for `eventName`.
+Returns the number of triggered event subscriptions.
+
+
+### .clear([eventName])
+Unsubscribe all subscriptions for `eventName` (if specified) or all subscriptions for all events.
+
+Returns the number of removed subscriptions.
 
     var nClearedSubscriptions = eventEmitter.clear('my_event');
     // whoever wants to receive events for `my_event` will have to re-subscribe now
